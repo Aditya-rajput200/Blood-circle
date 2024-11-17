@@ -1,10 +1,18 @@
 
 
-
-
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from "./login";
+import Signup from "./Signup";
+import LandingCards from './LandingCards';
 import { Spotlight } from "./components/ui/Spotlight";
 import {WavyBackground} from "./components/ui/wavy-background"
 import { AnimatedTooltipPreview } from "./test";
+// import Navbar from './components/Navbar';
+// import Register from './components/Register';
+
+// import UserDashboard from './components/UserDashboard';
+// import AdminDashboard from './components/AdminDashboard';
 
 function App() {
   return (
@@ -13,7 +21,6 @@ function App() {
     
       {/* Navbar */}
       <div className="navbar bg-base-100">
-       
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -33,33 +40,39 @@ function App() {
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li><a>Donor</a></li>
-        <li><a>User</a></li>
-        <li><a>Hospital Registration</a></li>
+        <li><a href="/donor">Donor</a></li>
+        <li><a href="/user">User</a></li>
+        <li><a href="/hospital-registration">Hospital Registration</a></li>
       </ul>
     </div>
-    <a className="btn btn-ghost font-bold text-red-800 text-xl">Blood Circle</a>
+    <a href="/" className="btn btn-ghost font-bold text-red-800 text-xl">Blood Circle</a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1 font-bold">
-      <li><a>Donor</a></li>
-      <li><a>User</a></li>
-      <li><a>Hospital Registration</a></li>
+      <li><a href="/donor">Donor</a></li>
+      <li><a href="/user">User</a></li>
+      <li><a href="/hospital-registration">Hospital Registration</a></li>
     </ul>
   </div>
   <div className="navbar-end">
-    
-    <a className="btn  bg-red-700 text-white hover:bg-red-900 border-red-900 ">Login</a>
+    <a href="/login" className="btn bg-red-700 text-white hover:bg-red-900 border-red-900">Login</a>
+    <a href="/signup" className="btn bg-red-700 text-white hover:bg-red-900 border-red-900">Signup</a>
   </div>
-  
 </div>
+<Router>
+      <Routes>
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    </Router>
+
+
 {/* heroSection */}
+
 <section>
   
   <div className="hero bg-base-200 min-h-screen py-19 mt-105 dark:bg-black dark:bg-grid-white/[0.2] bg-grid-black/[0.2]">
-
-  
-  
     <div className="hero-content text-center">
       <div className="max-w-md">
         <h1 className="text-5xl font-bold">Making Every Drop <br /> Count🩸</h1>
@@ -73,13 +86,33 @@ function App() {
         </button>
       </div>
     </div>
-   
   </div>
+
+  <LandingCards/>
+
+  <div className="hero bg-base-200 ">
+  <div className="hero-content flex-col lg:flex-row">
+    <img
+      src="https://i.pinimg.com/736x/6d/8b/a9/6d8ba9167220a74688d3d0680be29dff.jpg"
+      className="max-w-sm rounded-md shadow-2xl" />
+    <div>
+      <h1 className="text-5xl font-bold">World Blood Donors Day</h1>
+      
+        <ul>World blood donor day is celebrated annually to mark the birthday anniversary of Karl Landsteiner on 14th June 1868.</ul>
+        <br/>
+        <ul>Landsteiner was awarded by the Nobel Prize for his discovery of ABO blood group system.</ul>
+        <br/>
+        <ul> The event was carried out for the first time in the year 2005 by a collaborative initiative of the World Health Organisation, the international federation of Red Cross and Red Crescent Societies to raise awareness of the need for safe blood and blood products, and to thank blood donors for their voluntary, life-saving gifts of blood.</ul>
+      
+      <button className="btn  bg-red-700 text-white hover:bg-red-900 border-red-900">Donate</button>
+    </div>
+  </div>
+</div>
   
 </section>
 
 {/* Stat */}
-<WavyBackground>
+
 <div className="flex justify-center items-center  py-4">
   <div className="stats shadow">
     <div className="stat place-items-center">
@@ -101,7 +134,7 @@ function App() {
     </div>
   </div>
 </div>
-</WavyBackground>
+
 
 
 {/*Testimonials */}
@@ -113,12 +146,13 @@ function App() {
 
 
 {/* Footer */}
+<div className="divider divider-primary"></div>
 <footer className="footer footer-center bg-base-200 text-base-content rounded p-10">
   <nav className="grid grid-flow-col gap-4">
     <a className="link link-hover">About us</a>
     <a className="link link-hover">Contact</a>
-    <a className="link link-hover">Jobs</a>
-    <a className="link link-hover">Press kit</a>
+    <a className="link link-hover">Volunteer Team</a>
+    {/* <a className="link link-hover"></a> */}
   </nav>
   <nav>
     <div className="grid grid-flow-col gap-4">
@@ -161,6 +195,10 @@ function App() {
     <p>Copyright © {new Date().getFullYear()} - All right reserved by ACME Industries Ltd</p>
   </aside>
 </footer>
+
+
+
+
 
     </div>
   )
