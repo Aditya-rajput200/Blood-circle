@@ -68,20 +68,20 @@ const Donate = () => {
           {/* Simple Carousel with Tailwind */}
           <div className="carousel w-full rounded-lg shadow-lg overflow-hidden">
             {/* Donor Center Locations Carousel */}
-            <div className="carousel-item w-full">
+            {/* <div className="carousel-item w-full">
               <img src="https://via.placeholder.com/400x300" alt="Donor Center Location" className="w-full object-cover"/>
               <div className="absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50 flex justify-center items-center">
                 <p className="text-white text-lg font-bold">Donor Centers Near You</p>
               </div>
-            </div>
+            </div> */}
 
             {/* Other Ways to Help Carousel */}
-            <div className="carousel-item w-full">
+            {/* <div className="carousel-item w-full">
               <img src="https://via.placeholder.com/400x300" alt="Other Ways to Help" className="w-full object-cover"/>
               <div className="absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50 flex justify-center items-center">
                 <p className="text-white text-lg font-bold">Support Blood Donation</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
