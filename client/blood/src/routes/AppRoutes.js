@@ -1,30 +1,31 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Donor from "../components/pages/Donate";
-import User from "../components/pages/User";
-import HospitalRegistration from "../components/pages/HospitalRegistration";
-import Donate from "../components/pages/Donate";
-import Home from "../components/pages/Home"
-import Login from "../components/pages/Login";
-import Signup from "../components/pages/Signup";
-import Navbar from "../components/ui/Navbar"; // Navbar Component
+import Home from "../pages/Home";
+import Registration from "../pages/Registration";
+import Login from "../pages/Login";
+import Dashboard from "../pages/Dashboard";
+import Donate from "../pages/Donate";
+import BloodRequestPage from '../pages/BloodRequestPage';
+import CheckBloodAvailability from "../pages/Awareness";
+// import PrivateRoute from "../PrivateRoute";
 
 const AppRoutes = () => {
   return (
-    <>
-      {/* Navbar */}
-      <Navbar />
-
-      {/* Routes */}
-      <Routes>
-        <Route path="/" element={<Home />} /> {/* Default page */}
-        
-        <Route path="/donor" element={<Donor />} />
-        <Route path="/user" element={<User />} />
-        <Route path="/hospital-registration" element={<HospitalRegistration />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/register" element={<Registration />} />
+      <Route path="/login" element={<Login />} />
+      
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/donate" element={<Donate />} />
+      <Route path="/blood-requests" element={<BloodRequestPage />} />
+      <Route path="/check-blood-availability" element={<CheckBloodAvailability />} />;
+    </Routes>
   );
 };
 
 export default AppRoutes;
+
+
+
+

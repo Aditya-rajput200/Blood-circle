@@ -1,13 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 
 const svgToDataUri = require("mini-svg-data-uri");
- 
-const colors = require("tailwindcss/colors");
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
- 
-import daisyui from "daisyui";
+const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette").default;
+const daisyui = require("daisyui");
+
 function addVariablesForColors({ addBase, theme }) {
   const allColors = flattenColorPalette(theme("colors"));
   const newVars = Object.fromEntries(
@@ -17,7 +13,6 @@ function addVariablesForColors({ addBase, theme }) {
     ":root": newVars,
   });
 }
-
 
 function addSvgPatterns({ matchUtilities, theme }) {
   matchUtilities(
@@ -42,13 +37,13 @@ function addSvgPatterns({ matchUtilities, theme }) {
   );
 }
 
-
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       boxShadow: {
-        input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
+        input:
+          "0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)",
       },
       animation: {
         spotlight: "spotlight 2s ease .75s 1 forwards",
@@ -67,23 +62,19 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('daisyui'),
-    addSvgPatterns,addVariablesForColors
-  ],
+  plugins: [daisyui, addSvgPatterns, addVariablesForColors],
   daisyui: {
     themes: [
       {
         mytheme: {
-          primary: '#ffffff',
-          secondary: '#000000',
-          accent: '#000000',
-          neutral: '#000000',
-          bttn:"#D0312D",
-          'base-100': '#000000', // Sets the base background to black
+          primary: "#ffffff",
+          secondary: "#000000",
+          accent: "#000000",
+          neutral: "#000000",
+          bttn: "#D0312D",
+          "base-100": "#000000", // Sets the base background to black
         },
       },
     ],
   },
 };
-

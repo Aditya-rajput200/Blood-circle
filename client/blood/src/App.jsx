@@ -1,21 +1,34 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import AppRoutes from "./routes/AppRoutes"; // Importing routes
-import { Spotlight } from "./components/ui/Spotlight";
-import AuthRoutes from "./routes/AuthRoute";
+import { Routes, Route } from "react-router-dom";
+
+
+
+
+import Navbar from "./components/Navabar";
+import Home from "./pages/home";
+import Login from "./pages/login";
+import Registration from "./pages/registration";
+import Dashboard from "./pages/dashboard";
+import ProtectedRoute from "./components/protectRoute.";
 
 function App() {
   return (
-    <Router>
-      <div className="!bg-black text-white">
-        {/* Spotlight or other global components */}
-        <Spotlight />
-        {/* Authroute */}
-        <AuthRoutes/>
-        {/* App Routes */}
-        <AppRoutes />
-      </div>
-    </Router>
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registration/>} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </div>
   );
 }
 

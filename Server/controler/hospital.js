@@ -1,7 +1,7 @@
 // hospital registration and login
 
 const { creteToken } = require("../middleware/auth");
-
+const prisma = require("../lib/prisma");
  
 exports.createHospital = async (req, res) => {
     const { name, email,hospitalId, State, city, pincode, address, phone } = req.body;
@@ -58,8 +58,7 @@ exports.loginHospital = async (req, res) => {
 
 
 // inventory
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+
 
 // Add or Update Blood Inventory
 exports.manageBloodInventory = async (req, res) => {
