@@ -1,0 +1,126 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @unique @default(uuid())
+  name      String
+  email     String    @unique
+  password  String
+  bloodGroup String
+  age       Int
+  gender    String
+  address   String
+  phone     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  donations  Donation[]
+  requests   BloodRequest[]
+  volunteers Volunteer[]
+}
+
+model Donar {
+  id        String   @id @unique @default(uuid())
+  name      String
+  bloodGroup String
+  age       Int
+  gender    String
+  address   String
+  phone     String
+  pincode   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  donations Donation[]
+}
+
+model Donation {
+  id       String   @id @unique @default(uuid())
+  userId   String
+  donarId  String
+  createdAt DateTime @default(now())
+
+  user     User    @relation(fields: [userId], references: [id])
+  donar    Donar   @relation(fields: [donarId], references: [id])
+}
+
+model BloodRequest {
+  id          String   @id @unique @default(uuid())
+  pincode     String
+  bloodGroup  String
+  age         Int
+  gender      String
+  phone       String
+  message     String
+  quantity    Int      @default(1)
+  isCompleted Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model Hospital {
+  id         String         @id @unique @default(uuid())
+  name       String
+  address    String
+  phone      String
+  email      String         @unique
+  hospitalId String
+  state      String
+  city       String
+  pincode    String
+  review     String?
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+
+  inventory  BloodInventory[]
+  events     Event[]        @relation("HospitalEvents")
+}
+
+model BloodInventory {
+  id         String   @id @default(uuid())
+  hospitalId String
+  bloodGroup String
+  quantity   Int
+  hospital   Hospital @relation(fields: [hospitalId], references: [id])
+}
+
+model Event {
+  id          String     @id @default(uuid())
+  name        String
+  description String
+  location    String
+  date        DateTime
+  organizer   String
+  hospitalId  String?
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  hospital    Hospital?  @relation("HospitalEvents", fields: [hospitalId], references: [id])
+  volunteers  Volunteer[]
+}
+
+model Volunteer {
+  id        String  @id @default(uuid())
+  userId    String
+  eventId   String
+  user      User    @relation(fields: [userId], references: [id])
+  event     Event   @relation(fields: [eventId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
