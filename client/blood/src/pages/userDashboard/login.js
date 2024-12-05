@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/authContext";
-
+import { useAuth } from "../../context/authContext";
+const port =  8000;
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,17 +9,43 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    
-
-    // Mock login validation
-    if (email === "user@example.com" && password === "password") {
-      login(() => navigate("/dashboard")); // Pass navigation logic as a callback
-    } else {
-      alert("Invalid email or password");
+  
+    try {
+      // Sending login request to the server
+      const response = await fetch(`http://localhost:${port}/api/v1/user/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }), // Use state values
+      });
+  
+      // Parsing the response
+      const data = await response.json();
+  
+      if (response.ok) {
+        // Assuming the server returns a token in `data.token`
+        const token = data.token;
+        console.log("Token:", token);
+  
+       
+        localStorage.setItem("authToken", token);
+  
+        // Mock login validation
+        login(() => navigate("/dashboard")); // Call login callback for navigation
+      } else {
+        // Handle login failure (e.g., invalid credentials)
+        alert(data.message || "Invalid email or password");
+      }
+    } catch (error) {
+      // Handle network or server errors
+      console.error("Error during login:", error);
+      alert("An error occurred. Please try again later.");
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-red-100 text-black flex items-center justify-center">

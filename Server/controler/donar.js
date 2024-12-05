@@ -58,6 +58,38 @@ exports.getBloodRequests = async (req, res) => {
       res.status(500).json({ message: 'Error fetching blood requests', error: error.message });
     }
   };
+
+ 
+
+// accepts blood request 
+exports.acceptBloodRequest = async (req, res) => {
+  const { donorId, userId, bloodGroup, quantity, message, pincode ,hospitalId} = req.body;
+
+  if (!donorId || !userId || !bloodGroup || !quantity || !message || !pincode) {
+    return res.status(400).json({ message: 'Please provide all required fields' });
+  }
+
+  try {
+
+    const donation = await prisma.donation.create({
+      data:{
+        donarId: donorId,
+        userId,
+        bloodGroup,
+        quantity,
+        message,
+        pincode,
+        hospitalId ,
+        
+        isCompleted: true
+      }
+    })
+    
+  } catch (error) {
+    
+  }
+
+}
   
 exports.scheduleDonation = async (req, res) => {
     const { donorId, userId, donationDate } = req.body;
@@ -105,6 +137,8 @@ exports.reviewHospital = async (req, res) => {
     } catch (error) {
       res.status(500).json({ message: 'Error submitting review', error: error.message });
     }
+  
+  
   };
   
 // set therir avibility 

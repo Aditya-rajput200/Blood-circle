@@ -40,10 +40,10 @@ exports.loginUser = async(req, res) =>{
         if(user.password != password){
             return res.status(401).json({ message: "Invalid Credentials" })
         }
-         const token =   creteToken(
+         const token = await  creteToken(
             {
                 id: user.id,
-                role:"user"
+           
             }
          )
        return res.status(200).json({ token })

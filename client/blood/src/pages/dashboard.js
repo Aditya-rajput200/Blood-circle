@@ -1,4 +1,5 @@
 import React from "react";
+import DonorDashboard from "./donarDashboard/dashboard";
 
 const Dashboard = () => {
   return (
@@ -14,6 +15,7 @@ const Dashboard = () => {
           <p className="text-gray-700 mt-4">View urgent donation requests near you.</p>
         </div>
       </div>
+        <DonorDashboard />
     </div>
   );
 };

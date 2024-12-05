@@ -18,7 +18,7 @@ const Registration = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
@@ -39,7 +39,8 @@ const Registration = () => {
       setError("Passwords do not match.");
       return;
     }
-
+       
+      
     // Mock registration success
     setSuccess("You’ve successfully registered! Now, log in to get started.");
   };

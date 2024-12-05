@@ -2,9 +2,11 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
+console.log(JWT_SECRET)
+
 
 // createtoken
-module.exports.creteToken = async (id,role) => {
+module.exports.creteToken = async (id) => {
 
     const token = jwt.sign({id}, JWT_SECRET, { expiresIn: "1h" })
     return token

@@ -2,9 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 
-
 const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    localStorage.removeItem("authToken");
+  };
 
   return (
     <nav className="bg-red-600 text-white px-4 py-3">
@@ -15,20 +19,25 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           {isAuthenticated ? (
             <>
-              <Link to="/dashboard" className="hover:underline">
-                Dashboard
-              </Link>
-              <button onClick={logout} className="bg-white text-red-600 px-3 py-1 rounded">
+            
+              <button
+                onClick={handleLogout}
+                className="bg-white text-red-600 px-3 py-1 rounded"
+              >
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className="hover:underline">
-                Login
+              {/* Navigation for Hospital, User, and Donor Pages */}
+              <Link to="/hospital" className="hover:underline">
+                Hospital
               </Link>
-              <Link to="/register" className="bg-white text-red-600 px-3 py-1 rounded">
-                Register
+              <Link to="/user" className="hover:underline">
+                User
+              </Link>
+              <Link to="/donor" className="hover:underline">
+                Donor
               </Link>
             </>
           )}
